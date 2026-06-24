@@ -43,7 +43,7 @@ require __DIR__ . '/includes/header.php';
 ?>
 
 <h2>Empresas (titulares)</h2>
-<p>Las empresas cuyos libros llevás. Cada venta y compra pertenece a una de ellas.</p>
+<p>Empresas de las que llevamos la contabilidad. Cada venta y compra pertenece a una empresa.</p>
 
 <?php if ($mensaje): ?><p class="ok"><?= htmlspecialchars($mensaje) ?></p><?php endif; ?>
 <?php if ($errores): ?>

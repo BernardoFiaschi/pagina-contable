@@ -201,7 +201,7 @@ $titulo = 'Importar';
 require __DIR__ . '/includes/header.php';
 ?>
 <h2>Importar comprobantes de ARCA</h2>
-<p>Subí el archivo de <strong>Mis Comprobantes</strong> (Emitidos o Recibidos) de ARCA, guardado como <strong>CSV</strong>.</p>
+<p>Subí el archivo de <strong>Mis Comprobantes</strong> (Emitidos o Recibidos) de ARCA, antes tenes que guardarlo como <strong>CSV</strong>.</p>
 <?php if ($errores): ?><ul class="errores"><?php foreach ($errores as $e): ?><li><?= htmlspecialchars($e) ?></li><?php endforeach; ?></ul><?php endif; ?>
 <?php if ($resultado): ?>
     <p class="ok">Importados: <strong><?= $resultado['importados'] ?></strong> · Duplicados omitidos: <?= $resultado['duplicados'] ?> · No reconocidos: <?= $resultado['omitidos'] ?> · Contactos creados: <?= $resultado['contactosNuevos'] ?></p>

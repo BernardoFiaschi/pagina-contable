@@ -85,7 +85,7 @@ function periodoLindo(string $p): string {
     </label>
     <label>Período
         <input type="month" name="periodo" value="<?= htmlspecialchars($periodo) ?>">
-        <small style="display:block; font-weight:400; color:#7b8794; margin-top:.25rem;">Elegí <strong>mes y año</strong> (ej. Junio 2026). Dejalo vacío para incluir todos los períodos.</small>
+        <small style="display:block; font-weight:400; color:#7b8794; margin-top:.25rem;">Elegí <strong>mes y año</strong> (con el siguiente formato de ej: 2026-05). Dejalo vacío para incluir todos los períodos.</small>
     </label>
     <button type="submit" class="btn btn-guardar">Ver resumen</button>
 </form>

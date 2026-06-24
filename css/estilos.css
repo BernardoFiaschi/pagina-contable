@@ -1,0 +1,316 @@
+/*
+ * css/estilos.css
+ * ---------------
+ * Estilos de toda la app. Es SOLO presentación: no afecta la lógica PHP.
+ * Estrategia para que no se vea "plano": variables de color, sombras suaves,
+ * más aire (espaciado), jerarquía tipográfica y un color de acento (índigo).
+ */
+
+/* Variables: definir colores/medidas en un lugar y reutilizarlas en todo el archivo.
+   Cambiando --acento acá, se actualiza el acento de toda la app. */
+:root {
+    --acento: #4f46e5;          /* índigo: color principal */
+    --acento-oscuro: #4338ca;
+    --acento-suave: #eef2ff;    /* fondo tenue del acento */
+    --texto: #1e293b;           /* gris azulado oscuro para el texto */
+    --texto-suave: #64748b;     /* gris medio para datos secundarios */
+    --borde: #e2e8f0;           /* líneas y bordes */
+    --fondo: #f1f5f9;           /* fondo general de la página */
+    --panel: #ffffff;           /* fondo de tarjetas/formularios */
+    --ok-bg: #dcfce7; --ok-tx: #166534;
+    --err-bg: #fee2e2; --err-tx: #991b1b;
+    --verde: #16a34a; --rojo: #dc2626; --cian: #0891b2;
+    --sombra: 0 1px 3px rgba(15,23,42,.08), 0 1px 2px rgba(15,23,42,.04);
+    --sombra-hover: 0 8px 24px rgba(15,23,42,.10);
+    --radio: 10px;              /* radio de bordes redondeados */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+/* ===== Barra superior con pestañas ===== */
+.barra {
+    background: var(--panel);
+    border-bottom: 1px solid var(--borde);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    position: sticky;       /* la barra queda fija arriba al hacer scroll */
+    top: 0;
+    z-index: 10;
+    box-shadow: var(--sombra);
+}
+.marca {
+    color: var(--texto);
+    font-weight: 800;
+    text-decoration: none;
+    padding: 1.1rem 0;
+    font-size: 1.1rem;
+    letter-spacing: -.02em;
+}
+.marca::before {                 /* puntito de acento antes del nombre */
+    content: "";
+    display: inline-block;
+    width: 9px; height: 9px;
+    background: var(--acento);
+    border-radius: 50%;
+    margin-right: .5rem;
+    vertical-align: middle;
+}
+.tabs { display: flex; gap: .15rem; flex-wrap: wrap; }
+.tabs a {
+    color: var(--texto-suave);
+    text-decoration: none;
+    padding: 1.1rem .95rem;
+    font-size: .92rem;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+}
+.tabs a:hover { color: var(--acento); }
+.tabs a.activo { color: var(--acento); border-bottom-color: var(--acento); }
+
+.contenedor { max-width: 960px; margin: 2.5rem auto; padding: 0 1.25rem; }
+
+h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 1.25rem; }
+h3 { font-size: 1.05rem; font-weight: 600; margin: 1rem 0 .5rem; color: var(--texto); }
+
+/* ===== Inicio: panel de conteos y tarjetas ===== */
+.stats { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.25rem 0 2rem; }
+.stat {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 1.1rem 1.5rem;
+    min-width: 120px;
+    flex: 1;
+}
+.stat-num { display: block; font-size: 2rem; font-weight: 800; color: var(--acento); letter-spacing: -.03em; }
+.stat-lbl { font-size: .75rem; color: var(--texto-suave); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+
+.menu-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.25rem; }
+.card {
+    display: block;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 1.4rem;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.card::before {                  /* franja de acento a la izquierda de cada tarjeta */
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--acento);
+    opacity: 0;
+    transition: opacity .15s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--sombra-hover); border-color: var(--acento); }
+.card:hover::before { opacity: 1; }
+.card h3 { color: var(--texto); margin: 0 0 .35rem; }
+.card p { font-size: .88rem; color: var(--texto-suave); margin: 0; }
+.card.muted { opacity: .55; }
+
+/* ===== Formularios ===== */
+.formulario {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    padding: 1.75rem;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    margin-bottom: 2rem;
+}
+/* Formularios anchos (los de comprobante, max-width 760) en DOS columnas:
+   así dejan de ser una tira larga vertical. */
+.formulario[style*="760"] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+    align-items: start;
+}
+/* Elementos que deben ocupar el ancho completo aunque el form sea de 2 columnas. */
+.formulario[style*="760"] > h3,
+.formulario[style*="760"] > table,
+.formulario[style*="760"] > p,
+.formulario[style*="760"] > button[type="submit"],
+.formulario[style*="760"] > #agregar,
+.formulario[style*="760"] > a.btn { grid-column: 1 / -1; }
+
+.formulario label { display: block; margin-bottom: 0; font-weight: 600; font-size: .82rem; color: var(--texto-suave); }
+.formulario input, .formulario select {
+    display: block;
+    width: 100%;
+    margin-top: .35rem;
+    padding: .6rem .7rem;
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+    font-size: .95rem;
+    font-weight: 400;
+    color: var(--texto);
+    background: #fff;
+    transition: border-color .15s, box-shadow .15s;
+}
+.formulario input:focus, .formulario select:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px var(--acento-suave);   /* halo de foco accesible */
+}
+
+/* ===== Botones ===== */
+.btn {
+    padding: .6rem 1.1rem;
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    background: #fff;
+    color: var(--texto);
+    transition: background .15s, box-shadow .15s, transform .1s;
+}
+.btn:hover { box-shadow: var(--sombra); }
+.btn:active { transform: translateY(1px); }
+.btn-guardar { background: var(--acento); color: #fff; border-color: var(--acento); }
+.btn-guardar:hover { background: var(--acento-oscuro); }
+.btn-editar  { background: var(--cian); color: #fff; border-color: var(--cian); }
+.btn-borrar  { background: var(--rojo); color: #fff; border-color: var(--rojo); }
+
+/* ===== Tablas ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    margin-bottom: 1rem;
+}
+th, td { padding: .8rem 1rem; text-align: left; border-bottom: 1px solid var(--borde); }
+th { background: #f8fafc; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); font-weight: 700; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #f8fafc; }
+
+/* ===== Mensajes ===== */
+.ok, .errores { padding: .85rem 1.1rem; border-radius: 8px; margin-bottom: 1.25rem; font-size: .9rem; }
+.ok { background: var(--ok-bg); color: var(--ok-tx); border-left: 3px solid var(--verde); }
+.errores { background: var(--err-bg); color: var(--err-tx); border-left: 3px solid var(--rojo); padding-left: 2.2rem; }
+
+/* ===== Fichas de ventas/compras ===== */
+.venta-card {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-left: 4px solid var(--acento);   /* franja de acento que da identidad a la ficha */
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 1.25rem 1.4rem;
+    margin-bottom: 1.1rem;
+    transition: box-shadow .15s;
+}
+.venta-card:hover { box-shadow: var(--sombra-hover); }
+.venta-cab {
+    display: flex; flex-wrap: wrap; gap: 1.1rem;
+    margin-bottom: .75rem; padding-bottom: .75rem;
+    border-bottom: 1px dashed var(--borde);
+    font-size: .9rem; color: var(--texto-suave);
+}
+.venta-cab strong { color: var(--texto); }
+.detalle-tabla { box-shadow: none; border: 1px solid var(--borde); margin-bottom: .75rem; }
+.detalle-tabla th, .detalle-tabla td { padding: .45rem .7rem; font-size: .85rem; }
+.venta-pie {
+    display: flex; flex-wrap: wrap; gap: 1.3rem;
+    margin-top: .5rem; font-size: .9rem; justify-content: flex-end;
+    color: var(--texto-suave);
+}
+.venta-pie strong { color: var(--texto); font-size: 1rem; }
+
+/* Pantallas chicas: el form de comprobante vuelve a una sola columna. */
+@media (max-width: 640px) {
+    .formulario[style*="760"] { grid-template-columns: 1fr; }
+    .contenedor { margin: 1.5rem auto; }
+    .barra { padding: 0 1rem; gap: 1rem; }
+}
+
+/* ===== Modo oscuro =====
+ * Como todos los colores son variables, el tema oscuro solo las REDEFINE.
+ * Se activa cuando <body> tiene la clase .oscuro (la pone js/tema.js).
+ * No hay que tocar ninguna regla de más abajo: todas usan var(--...).
+ */
+body.oscuro {
+    --acento: #818cf8;          /* índigo más claro, se lee mejor sobre fondo oscuro */
+    --acento-oscuro: #6366f1;
+    --acento-suave: #312e81;
+    --texto: #e2e8f0;           /* texto claro */
+    --texto-suave: #94a3b8;
+    --borde: #334155;
+    --fondo: #0f172a;           /* fondo casi negro azulado */
+    --panel: #1e293b;           /* tarjetas un poco más claras que el fondo */
+    --ok-bg: #052e16;  --ok-tx: #86efac;
+    --err-bg: #450a0a; --err-tx: #fca5a5;
+    --sombra: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
+    --sombra-hover: 0 8px 24px rgba(0,0,0,.5);
+}
+/* En oscuro, los fondos grisáceos fijos (#f8fafc) de tablas/hover se adaptan. */
+body.oscuro th { background: #0f172a; }
+body.oscuro tbody tr:hover,
+body.oscuro .detalle-tabla th { background: #0f172a; }
+body.oscuro .formulario input,
+body.oscuro .formulario select,
+body.oscuro .btn { background: #0f172a; }
+
+/* Botón toggle del tema en la barra */
+.toggle-tema {
+    margin-left: auto;          /* lo empuja al extremo derecho de la barra */
+    background: none;
+    border: 1px solid var(--borde);
+    color: var(--texto-suave);
+    border-radius: 7px;
+    padding: .4rem .7rem;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+}
+.toggle-tema:hover { color: var(--acento); border-color: var(--acento); }
+
+/* ===== Listado compacto de ventas/compras ===== */
+/* Bloque de alta plegable: el formulario no ocupa media pantalla si no lo necesitás. */
+.bloque-alta { background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); box-shadow: var(--sombra); margin-bottom: 2rem; }
+.bloque-alta > summary { padding: 1rem 1.25rem; cursor: pointer; font-weight: 600; color: var(--acento); list-style: none; }
+.bloque-alta > summary::-webkit-details-marker { display: none; }
+.bloque-alta[open] > summary { border-bottom: 1px solid var(--borde); }
+.bloque-alta .formulario { box-shadow: none; border: none; margin-bottom: 0; }
+
+/* Fila de filtros: campos chicos en línea. */
+.filtros { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: end; background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); box-shadow: var(--sombra); padding: 1rem 1.25rem; margin-bottom: 1rem; }
+.filtros label { display: block; font-size: .75rem; font-weight: 600; color: var(--texto-suave); }
+.filtros select, .filtros input { margin-top: .3rem; padding: .45rem .6rem; border: 1px solid var(--borde); border-radius: 7px; background: #fff; color: var(--texto); font-size: .9rem; }
+body.oscuro .filtros select, body.oscuro .filtros input { background: #0f172a; }
+
+/* Barra de acciones arriba de la tabla (botón eliminar + conteo). */
+.tabla-acciones { display: flex; align-items: center; gap: 1rem; margin-bottom: .6rem; }
+.tabla-acciones .conteo { color: var(--texto-suave); font-size: .85rem; }
+
+/* Tabla compacta: una fila por comprobante. */
+.tabla-lista th, .tabla-lista td { padding: .55rem .8rem; font-size: .9rem; vertical-align: middle; }
+.tabla-lista .num { text-align: right; white-space: nowrap; }
+.tabla-lista .muted { color: var(--texto-suave); font-size: .82rem; }
+.tabla-lista .acciones-fila { text-align: right; white-space: nowrap; }
+.tabla-lista .acciones-fila a { text-decoration: none; font-size: 1rem; margin-left: .4rem; }
+.tabla-lista input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }

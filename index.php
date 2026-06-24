@@ -27,7 +27,7 @@ require __DIR__ . '/includes/header.php';
     <a class="card" href="/ventas.php"><h3>Ventas</h3><p>Registrar y ver comprobantes emitidos.</p></a>
     <a class="card" href="/compras.php"><h3>Compras</h3><p>Registrar y ver comprobantes recibidos.</p></a>
     <a class="card" href="/resumen.php"><h3>Resumen</h3><p>Posición de IVA por empresa y período.</p></a>
-    <a class="card" href="/importar.php"><h3>Importar</h3><p>Subir el CSV de ARCA (ventas o compras).</p></a>
+    <a class="card" href="/importar.php"><h3>Importar</h3><p>Importaciones masivas. Subir el CSV de ARCA (ventas o compras).</p></a>
 </div>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

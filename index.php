@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/includes/auth.php';
+requerirLogin();
 
 // Conteos rápidos para el panel.
 $stats = [
@@ -28,6 +30,7 @@ require __DIR__ . '/includes/header.php';
     <a class="card" href="/compras.php"><h3>Compras</h3><p>Registrar y ver comprobantes recibidos.</p></a>
     <a class="card" href="/resumen.php"><h3>Resumen</h3><p>Posición de IVA por empresa y período.</p></a>
     <a class="card" href="/importar.php"><h3>Importar</h3><p>Importaciones masivas. Subir el CSV de ARCA (ventas o compras).</p></a>
+    <a class="card" href="/liquidacion.php"><h3>Liquidacion</h3><p>Liquidaciones mensuales de IVA(ARCA) e Ingresos Brutos(ARBA).</p></a>
 </div>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

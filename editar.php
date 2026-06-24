@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/includes/auth.php';
+requerirLogin();
 
 // 1) Tomamos el id de la URL y validamos que sea entero.
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

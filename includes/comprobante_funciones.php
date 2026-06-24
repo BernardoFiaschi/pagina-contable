@@ -31,7 +31,7 @@ function alicuotasValidas(): array {
  * quedamos con los tres que definen la lógica de IVA: Factura, NC y ND.)
  */
 function tiposComprobante(): array {
-    return ['Factura', 'Nota de Crédito', 'Nota de Débito'];
+    return ['Factura', 'Nota de Crédito', 'Nota de Débito', 'Certificado de Retención'];
 }
 
 /**

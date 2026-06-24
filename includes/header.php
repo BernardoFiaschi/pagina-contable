@@ -17,9 +17,15 @@
             <a href="/contactos.php" class="<?= ($actual === 'contactos.php' || $actual === 'editar.php') ? 'activo' : '' ?>">Contactos</a>
             <a href="/ventas.php"    class="<?= $actual === 'ventas.php' ? 'activo' : '' ?>">Ventas</a>
             <a href="/compras.php"   class="<?= $actual === 'compras.php' ? 'activo' : '' ?>">Compras</a>
-            <a href="/resumen.php"   class="<?= $actual === 'resumen.php' ? 'activo' : '' ?>">Resumen</a>
-            <a href="/importar.php"  class="<?= $actual === 'importar.php' ? 'activo' : '' ?>">Importar</a>
+            <a href="/resumen.php"      class="<?= $actual === 'resumen.php' ? 'activo' : '' ?>">Resumen</a>
+            <a href="/liquidacion.php"          class="<?= $actual === 'liquidacion.php' ? 'activo' : '' ?>">Liquidación</a>
+            <a href="/importar_retenciones.php" class="<?= $actual === 'importar_retenciones.php' ? 'activo' : '' ?>">Retenciones</a>
+            <a href="/importar.php"             class="<?= $actual === 'importar.php' ? 'activo' : '' ?>">Importar</a>
         </nav>
         <button id="toggle-tema" class="toggle-tema" type="button" aria-label="Cambiar tema">🌙</button>
+        <?php if (function_exists('usuarioNombre') && usuarioNombre() !== ''): ?>
+            <span class="usuario-barra"><?= htmlspecialchars(usuarioNombre()) ?></span>
+            <a href="/logout.php" class="btn" style="padding:.4rem .7rem;">Salir</a>
+        <?php endif; ?>
     </header>
     <main class="contenedor">

@@ -61,9 +61,10 @@ if (empty($filas)) { $filas = [['alicuota' => '21', 'monto_gravado' => '']]; }
     <label>Tipo de comprobante
         <select name="comprobante_tipo">
             <option value="">Elegí...</option>
-            <option value="Factura"          <?= sel('Factura', vget($v, 'comprobante_tipo')) ?>>Factura</option>
-            <option value="Nota de Crédito"  <?= sel('Nota de Crédito', vget($v, 'comprobante_tipo')) ?>>Nota de Crédito</option>
-            <option value="Nota de Débito"   <?= sel('Nota de Débito', vget($v, 'comprobante_tipo')) ?>>Nota de Débito</option>
+            <option value="Factura"                  <?= sel('Factura', vget($v, 'comprobante_tipo')) ?>>Factura</option>
+            <option value="Nota de Crédito"          <?= sel('Nota de Crédito', vget($v, 'comprobante_tipo')) ?>>Nota de Crédito</option>
+            <option value="Nota de Débito"           <?= sel('Nota de Débito', vget($v, 'comprobante_tipo')) ?>>Nota de Débito</option>
+            <option value="Certificado de Retención" <?= sel('Certificado de Retención', vget($v, 'comprobante_tipo')) ?>>Certificado de Retención</option>
         </select>
     </label>
     <label>Letra
